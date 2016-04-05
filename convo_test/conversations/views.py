@@ -35,7 +35,7 @@ class Success(View):
         if self.text_file.name.split('.')[-1].lower() == 'txt':
             content = self.text_file.read().decode(encoding="utf-8")
             #print(content)
-            c = conversation(phone_number=+919800397328, content=content)
+            c = conversation(phone_number="+919800397328", content=content)
             c.save()
             print("saved")
             return True

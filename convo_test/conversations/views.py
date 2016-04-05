@@ -1,18 +1,15 @@
-from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from django.views.generic import FormView, View
 from django.contrib import messages
-from django.core.files.storage import default_storage
 from django.core.files.uploadedfile import UploadedFile
 
 from .forms import FilesForm
 from .models import conversation
+from .algo import parse_data, commit_extracted_data
 
 
 applink = '/conversations'
-
-#text_file = UploadedFile()
 
 class Index(FormView):
     template_name = 'conversations/index.html'
@@ -35,8 +32,8 @@ class Success(View):
         if self.text_file.name.split('.')[-1].lower() == 'txt':
             content = self.text_file.read().decode(encoding="utf-8")
             #print(content)
-            c = conversation(phone_number="+919800397328", content=content)
-            c.save()
+            extracted_data = parse_data(content)
+            commit_extracted_data(extracted_data)
             print("saved")
             return True
         else:

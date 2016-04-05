@@ -36,7 +36,7 @@ def parse_data(data):
     for entry in extracted_data:
         #check date is in dd-mm-yy format
         datetime.strptime(entry[1], '%d-%m-%y')
-        
+
 
 
 data = "Phone Number:9764543218|Date:18-02-16|Sentence:get there asap.\n" \

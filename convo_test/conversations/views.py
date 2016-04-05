@@ -7,6 +7,7 @@ from django.core.files.storage import default_storage
 from django.core.files.uploadedfile import UploadedFile
 
 from .forms import FilesForm
+from .models import conversation
 
 
 applink = '/conversations'
@@ -32,6 +33,11 @@ class Success(View):
         if len(self.text_file.name.split('.')) == 1:
             return False
         if self.text_file.name.split('.')[-1].lower() == 'txt':
+            content = self.text_file.read().decode(encoding="utf-8")
+            #print(content)
+            c = conversation(phone_number=+919800397328, content=content)
+            c.save()
+            print("saved")
             return True
         else:
             return False
@@ -42,8 +48,8 @@ class Success(View):
             #print('valid form')
             #print(type(request.FILES['file1']))
             self.text_file = UploadedFile(request.FILES['file1'])
-            print(self.text_file.name)
-            print(self.text_file.content_type)
+            #print(self.text_file.name)
+            #print(self.text_file.content_type)
             if self.process_file():
                 return HttpResponseRedirect(applink + '/result')
             else:
@@ -60,7 +66,7 @@ class Parser(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Parser, self).get_context_data(**kwargs)
-        #context['result_content'] = text_file.name
+        context['result_content'] = conversation.objects.filter(id=1)[0].content
         return context
 
 class Error(TemplateView):

@@ -19,14 +19,16 @@ def parse_data(data):
         if entry == '':
             continue
         line_stubs = entry.split(separator)
+        data_blobs = []
         print(line_stubs)
         if len(line_stubs) != no_of_stubs:
             raise ValueError("The given data does not adhere to the required format")
         for i in range(no_of_stubs):
             if line_stubs[i][:scale[i]] == labels[i]:
-                extracted_data.append(line_stubs[i][scale[i]:])
+                data_blobs.append(line_stubs[i][scale[i]:])
             else:
                 raise ValueError("The given data does not adhere to the required format")
+        extracted_data.append(data_blobs)
         print(extracted_data)
 
 data = "Phone Number:9764543218|Date:18-02-16|Sentence:get there asap.\n" \

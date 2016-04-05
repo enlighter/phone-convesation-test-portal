@@ -5,6 +5,8 @@ The file `test-doc.txt` is a text file containing the data in the given format f
 in the required order by the portal
 
 To run the portal,
+  * install django and django-bootstrap3 : 
+  `[sudo] pip3 install --upgrade django django-bootstrap3`
   * in `terminal`, `cd` into `convo_test` folder.
   * execute: `python3 manage.py migrate`
   * execute: `python3 manage.py runserver`

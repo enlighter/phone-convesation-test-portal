@@ -46,5 +46,24 @@ def commit_extracted_data(extracted_data):
         c.save()
 
 def get_formatted_conversations():
-    list = conversation.objects.all().order_by('phone_number', 'date')
+    list = []
+    conversations = conversation.objects.all().order_by('phone_number', 'date')
+    prev_no = conversations[0].phone_number
+    prev_date = conversations[0].date
+    dict = {}
+    dict['content'] = ''
+    for c in conversations:
+        if c.date != prev_date:
+            list.append(dict)
+            dict = {}
+            dict['content'] = ''
+
+        dict['phone_number'] = c.phone_number
+        dict['date'] = c.date
+        dict['content'] += '\n' + c.content
+
+        prev_no = c.phone_number
+        prev_date = c.date
+    list.append(dict)
+
     return list

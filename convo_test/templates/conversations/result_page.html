@@ -16,7 +16,7 @@
             {% for entry in result_content %}
                 <p>
                     <b>{{ entry.phone_number }}:</b> <i>{{ entry.date }}</i>
-                     {{ entry.content }}
+                     {{ entry.content|linebreaks }}
                 </p>
             {% endfor %}
         {% endblock %}

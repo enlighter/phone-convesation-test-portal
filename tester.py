@@ -33,9 +33,13 @@ def parse_data(data):
         extracted_data.append(data_blobs)
         print(extracted_data)
 
+    list_of_phone_numbers = []
     for entry in extracted_data:
         #check date is in dd-mm-yy format
         datetime.strptime(entry[1], '%d-%m-%y')
+        list_of_phone_numbers.append(entry[0])
+    set_of_phone_numbers = set(list_of_phone_numbers)
+    print(set_of_phone_numbers)
 
 
 

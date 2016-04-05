@@ -13,9 +13,12 @@
         {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
 
         {% block content %}
-          <p>
-            {{ result_content }}
-          </p>
+            {% for entry in result_content %}
+                <p>
+                    <b>{{ entry.phone_number }}:</b> <i>{{ entry.date }}</i>
+                    <p> {{ entry.content }} </p>
+                </p>
+            {% endfor %}
         {% endblock %}
     </div>
 

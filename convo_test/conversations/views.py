@@ -6,7 +6,7 @@ from django.core.files.uploadedfile import UploadedFile
 
 from .forms import FilesForm
 from .models import conversation
-from .algo import parse_data, commit_extracted_data
+from .algo import parse_data, commit_extracted_data, get_formatted_conversations
 
 
 applink = '/conversations'
@@ -63,7 +63,7 @@ class Parser(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Parser, self).get_context_data(**kwargs)
-        context['result_content'] = conversation.objects.filter(id=1)[0].content
+        context['result_content'] = get_formatted_conversations()
         return context
 
 class Error(TemplateView):

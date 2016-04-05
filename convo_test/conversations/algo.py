@@ -44,3 +44,7 @@ def commit_extracted_data(extracted_data):
         valid_datetime = datetime.strptime(entry[1], '%d-%m-%y')
         c = conversation(phone_number=entry[0], date=valid_datetime, content=entry[2])
         c.save()
+
+def get_formatted_conversations():
+    list = conversation.objects.all().order_by('phone_number')
+    return list

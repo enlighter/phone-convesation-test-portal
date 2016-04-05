@@ -9,4 +9,4 @@ To run the portal,
   * execute: `python3 manage.py migrate`
   * execute: `python3 manage.py runserver`
   * open a browser and goto the link `localhost:8000/conversations`
-  * select the txt file containing the information in the required format and press *OK* button.
+  * select the txt file containing the information in the required format and press **OK** button.

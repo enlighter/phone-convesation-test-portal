@@ -32,6 +32,7 @@ class Success(View):
         if self.text_file.name.split('.')[-1].lower() == 'txt':
             content = self.text_file.read().decode(encoding="utf-8")
             #print(content)
+            conversation.objects.all().delete()
             extracted_data = parse_data(content)
             commit_extracted_data(extracted_data)
             print("saved")

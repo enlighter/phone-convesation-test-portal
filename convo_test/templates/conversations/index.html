@@ -4,7 +4,7 @@
 
 {% block bootstrap3_content %}
     <div class="container">
-        <h1>{% block title %}Telephone Conversations{% endblock %}</h1>
+        <h1>{% block title %}Telephone Transcripts{% endblock %}</h1>
 
         <p>
             <a href="{% url 'index' %}">home</a>
@@ -14,7 +14,7 @@
 
         {% block content %}
 
-        <form role="form" method="post" enctype="multipart/form-data" {% if layout != 'vertical' %}class="form-{{ layout }}"{% endif %}>
+        <form action="{% url 'result' %}" role="form" method="post" enctype="multipart/form-data" {% if layout != 'vertical' %}class="form-{{ layout }}"{% endif %}>
         {% csrf_token %}
         {% bootstrap_form form layout=layout %}
         {% buttons submit='OK' reset="Cancel" %}{% endbuttons %}

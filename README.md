@@ -1,4 +1,4 @@
-# phone-convesation-test-portal
+# phone-conversation-test-portal
 The file `tester.py` contains the extraction logic testing in standalone Python script.
 
 The file `test-doc.txt` is a text file containing the data in the given format for extracting the data

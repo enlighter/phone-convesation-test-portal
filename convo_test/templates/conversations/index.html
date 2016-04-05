@@ -12,7 +12,15 @@
 
         {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
 
-        {% block content %}(no content){% endblock %}
+        {% block content %}
+
+        <form role="form" method="post" enctype="multipart/form-data" {% if layout != 'vertical' %}class="form-{{ layout }}"{% endif %}>
+        {% csrf_token %}
+        {% bootstrap_form form layout=layout %}
+        {% buttons submit='OK' reset="Cancel" %}{% endbuttons %}
+        </form>
+
+        {% endblock %}
     </div>
 
 {% endblock %}

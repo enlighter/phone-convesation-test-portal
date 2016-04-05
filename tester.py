@@ -1,3 +1,5 @@
+from datetime import datetime
+
 separator = '|'
 period = '.\n'
 no_of_stubs = 3
@@ -30,6 +32,12 @@ def parse_data(data):
                 raise ValueError("The given data does not adhere to the required format")
         extracted_data.append(data_blobs)
         print(extracted_data)
+
+    for entry in extracted_data:
+        #check date is in dd-mm-yy format
+        datetime.strptime(entry[1], '%d-%m-%y')
+        
+
 
 data = "Phone Number:9764543218|Date:18-02-16|Sentence:get there asap.\n" \
        "Phone Number:9764643248|Date:18-02-16|Sentence:Hi there!.\n" \

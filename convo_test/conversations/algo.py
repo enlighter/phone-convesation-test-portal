@@ -51,19 +51,32 @@ def get_formatted_conversations():
     prev_no = conversations[0].phone_number
     prev_date = conversations[0].date
     dict = {}
-    dict['content'] = ''
+    dict['phone_number'] = prev_no
+    dict['conversations'] = []
+    d={}
+    d['content'] = ''
     for c in conversations:
-        if c.date != prev_date:
+        if c.phone_number == prev_no:
+            if c.date != prev_date:
+                dict['conversations'].append(d)
+                d={}
+                d['content'] = ''
+
+        else:
+            dict['conversations'].append(d)
             list.append(dict)
             dict = {}
-            dict['content'] = ''
+            dict['phone_number'] = c.phone_number
+            dict['conversations'] = []
+            d = {}
+            d['content'] = ''
 
-        dict['phone_number'] = c.phone_number
-        dict['date'] = c.date
-        dict['content'] += '\n' + c.content
+        d['date'] = c.date.strftime('%m-%d-%y')
+        d['content'] += c.content + '\n'
 
         prev_no = c.phone_number
         prev_date = c.date
+    dict['conversations'].append(d)
     list.append(dict)
 
     return list

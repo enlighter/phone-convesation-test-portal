@@ -15,8 +15,14 @@
         {% block content %}
             {% for entry in result_content %}
                 <p>
-                    <b>{{ entry.phone_number }}:</b> <i>{{ entry.date }}</i>
-                     {{ entry.content|linebreaks }}
+                    <b>{{ entry.phone_number }}:</b>
+
+                    {% for convo in entry.conversations %}
+                    <p style="padding-left: 10px; float: left">
+                        <i>{{ convo.date }}:-</i>
+                        {{ convo.content|linebreaks }}
+                    </p>
+                    {% endfor %}
                 </p>
             {% endfor %}
         {% endblock %}

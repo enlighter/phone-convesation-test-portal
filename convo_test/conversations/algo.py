@@ -80,3 +80,19 @@ def get_formatted_conversations():
     list.append(dict)
 
     return list
+
+def get_domain_conversations():
+    conversations = conversation.objects.all().order_by('phone_number', 'date')
+    dict = {}
+    dict['bill'] = []
+    dict['cab'] = []
+    dict['recharge'] = []
+    for c in conversations:
+        if 'bill' in c.content:
+            dict['bill'].append(str(c.phone_number)+":"+c.date.strftime('%m-%d-%y')+":"+c.content)
+        if 'cab' in c.content:
+            dict['cab'].append(str(c.phone_number) + ":" + c.date.strftime('%m-%d-%y') + ":" + c.content)
+        if 'recharge' in c.content:
+            dict['recharge'].append(str(c.phone_number) + ":" + c.date.strftime('%m-%d-%y') + ":" + c.content)
+    print(dict)
+    return dict

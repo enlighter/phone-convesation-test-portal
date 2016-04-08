@@ -12,3 +12,8 @@ To run the portal,
   * execute: `python3 manage.py runserver`
   * open a browser and goto the link `localhost:8000/conversations`
   * select the txt file containing the information in the required format and press **OK** button.
+
+To help in exploring the code:
+* The code for rendering webpages of the portal, is in folder: `convo_test->conversations->views.py`
+* The data model is in `convo_test->conversations->models.py`
+* And the algorithm is in `convo_test->conversations->algo.py`

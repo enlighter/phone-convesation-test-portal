@@ -1,10 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% load bootstrap3 %}
+
+{% block bootstrap3_content %}
+    <div class="container">
+        <h1>{% block title %}Telephone Conversations{% endblock %}</h1>
+
+        <p>
+            <a href="{% url 'index' %}">home</a>
+        </p>
+
+        {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+
+        {% block content %}
+            <p>
+                <b>Mentions 'bill' :</b>
+                    {% for conversation in result_content.bill %}
+                    <p style="padding-left: 10px; float: left">
+                        {{ conversation|linebreaks }}
+                    </p>
+                    {% endfor %}
+            </p>
+            <p>
+                <b>Mentions 'cab' :</b>
+                    {% for conversation in result_content.cab %}
+                    <p style="padding-left: 10px; float: left">
+                        {{ conversation|linebreaks }}
+                    </p>
+                    {% endfor %}
+            </p>
+            <p>
+                <b>Mentions 'recharge' :</b>
+                    {% for conversation in result_content.recharge %}
+                    <p style="padding-left: 10px; float: left">
+                        {{ conversation|linebreaks }}
+                    </p>
+                    {% endfor %}
+            </p>
+        {% endblock %}
+    </div>
+
+{% endblock %}

@@ -6,7 +6,8 @@ from django.core.files.uploadedfile import UploadedFile
 
 from .forms import FilesForm
 from .models import conversation
-from .algo import parse_data, commit_extracted_data, get_formatted_conversations
+from .algo import parse_data, commit_extracted_data, \
+    get_formatted_conversations, get_domain_conversations
 
 
 applink = '/conversations'
@@ -45,11 +46,15 @@ class Success(View):
         if form.is_valid():
             #print('valid form')
             #print(type(request.FILES['file1']))
+            print(request.POST['way'])
             self.text_file = UploadedFile(request.FILES['file1'])
             #print(self.text_file.name)
             #print(self.text_file.content_type)
             if self.process_file():
-                return HttpResponseRedirect(applink + '/result')
+                if request.POST['way'] == 'choice1':
+                    return HttpResponseRedirect(applink + '/result')
+                elif request.POST['way'] == 'choice2':
+                    return HttpResponseRedirect(applink + '/domain')
             else:
                 return HttpResponseRedirect(applink + '/error')
 
@@ -65,6 +70,14 @@ class Parser(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(Parser, self).get_context_data(**kwargs)
         context['result_content'] = get_formatted_conversations()
+        return context
+
+class DomainView(TemplateView):
+    template_name = 'conversations/domain_page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DomainView, self).get_context_data(**kwargs)
+        context['result_content'] = get_domain_conversations()
         return context
 
 class Error(TemplateView):
